@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BasketballScoring</string>
+    <string name="tv_team_a">TeamA</string>
+    <string name="tv_team_b">TeamB</string>
+    <string name="tv_score_a">0</string>
+    <string name="tv_score_b">0</string>
+    <string name="button1">+1</string>
+    <string name="button2">+2</string>
+    <string name="button3">+3</string>
+    <string name="undo_bt">undo</string>
+    <string name="reset_bt">reset</string>
+    <string name="data_key">dataKey</string>
+    <string name="shp_name">sharedPreference</string>
+</resources>
