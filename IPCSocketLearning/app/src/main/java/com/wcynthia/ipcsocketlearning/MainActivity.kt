@@ -1,5 +1,7 @@
 package com.wcynthia.ipcsocketlearning
 
+import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +9,15 @@ import android.os.Handler
 import android.os.Message
 import android.os.RemoteException
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.widget.Button
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.lang.Exception
 import java.lang.StringBuilder
+import java.lang.ref.WeakReference
 import java.net.Socket
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,17 +33,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var input: BufferedReader
     private lateinit var mClientSocket: Socket
     lateinit var stringBuilder: StringBuilder
-    private val mHandler = object : Handler() {
+    class MyHandler(activity: MainActivity):Handler(){
+        private val mActivity = WeakReference<MainActivity>(activity)
         override fun handleMessage(msg: Message) {
+            val activity = mActivity.get()
             when (msg.what) {
                 MSG_READY -> {
                     Log.e(TAG, "创建Socket完成")
-                    button2.isEnabled = true
+                     activity?.findViewById<Button>(R.id.button2)?.isEnabled = true
                 }
                 MSG_RECEIVED -> {
                     Log.e(TAG, "接收到消息")
-                    stringBuilder.append(msg.obj).append("\n")
-                    textView.text = stringBuilder.toString()
+                    activity?.stringBuilder?.append(msg.obj)?.append("\n")
+                    activity?.findViewById<TextView>(R.id.textView)?.text = activity?.stringBuilder?.toString()
                 }
                 else -> {
                     super.handleMessage(msg)
@@ -44,7 +53,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private val mHandler = MyHandler(this)
 
+    fun RotateAnimation(){
+        val animation = RotateAnimation(0f,90f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f)
+        animation.fillAfter
+        animation.repeatCount
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
