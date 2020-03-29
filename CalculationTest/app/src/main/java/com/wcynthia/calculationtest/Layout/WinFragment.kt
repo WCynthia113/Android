@@ -1,4 +1,4 @@
-package com.wcynthia.calculationtest
+package com.wcynthia.calculationtest.Layout
 
 
 import android.os.Bundle
@@ -6,18 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.wcynthia.calculationtest.R
 
 /**
  * A simple [Fragment] subclass.
  */
-class LoseFragment : Fragment() {
+class WinFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lose, container, false)
+        return inflater.inflate(R.layout.fragment_win, container, false)
     }
 
 

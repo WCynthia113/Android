@@ -1,7 +1,8 @@
-package com.wcynthia.calculationtest
+package com.wcynthia.calculationtest.Layout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wcynthia.calculationtest.R
 
 class MainActivity : AppCompatActivity() {
 
