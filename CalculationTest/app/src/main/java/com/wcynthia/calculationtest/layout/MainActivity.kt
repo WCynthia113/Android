@@ -1,4 +1,4 @@
-package com.wcynthia.calculationtest.Layout
+package com.wcynthia.calculationtest.layout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.wcynthia.calculationtest.ViewModel
+package com.wcynthia.calculationtest.viewModel
 
 import android.app.Application
 import android.content.Context
@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import java.util.*
-import java.util.logging.Level
 
 class MyViewModel(application: Application, savedStateHandle: SavedStateHandle): AndroidViewModel(application) {
     companion object{
@@ -18,7 +17,7 @@ class MyViewModel(application: Application, savedStateHandle: SavedStateHandle):
         const val KEY_CURRENT_SCORE = "key_current_score"
         const val SAVE_SHP_DATA = "save_shp_data_name"
     }
-    private var win_flag = false
+    var win_flag = false
     private val handle: SavedStateHandle
 
     init {
@@ -64,12 +63,12 @@ class MyViewModel(application: Application, savedStateHandle: SavedStateHandle):
         }else{
             getOperator().value = "-"
             if (x>y){
-                getRightNumber().value = x
-                getLeftNumber().value = y
-                getAnswer().value = x-y
-            }else{
                 getRightNumber().value = y
                 getLeftNumber().value = x
+                getAnswer().value = x-y
+            }else{
+                getRightNumber().value = x
+                getLeftNumber().value = y
                 getAnswer().value = y-x
             }
         }
@@ -82,10 +81,14 @@ class MyViewModel(application: Application, savedStateHandle: SavedStateHandle):
     }
     fun answerCorrect(){
         getCurrentScore().value = getCurrentScore().value!!+1
+        generator()
+    }
+    fun answerWrong(){
         if(getCurrentScore().value!!>getHighScore().value!!){
             getHighScore().value = getCurrentScore().value
+            win_flag = true
+        }else{
+            win_flag = false
         }
-        win_flag = true
-        generator()
     }
 }

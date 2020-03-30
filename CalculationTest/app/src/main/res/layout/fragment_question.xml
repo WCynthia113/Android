@@ -7,13 +7,13 @@
 
         <variable
             name="data"
-            type="com.wcynthia.calculationtest.ViewModel.MyViewModel" />
+            type="com.wcynthia.calculationtest.viewModel.MyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Layout.QuestionFragment">
+        tools:context=".layout.QuestionFragment">
 
 
         <TextView
@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
-            tools:text="@{data.leftNumber}" />
+            tools:text="@{String.valueOf(data.leftNumber)}" />
 
         <TextView
             android:id="@+id/textView5"
@@ -48,7 +48,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5"
-            tools:text="@{data.rightNumber}" />
+            tools:text="@{data.rightNumber.toString()}" />
 
         <TextView
             android:id="@+id/textView7"
@@ -122,17 +122,17 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{string/current_score(data.currentScore)}"
+            android:text="@{@string/current_score(data.currentScore)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/tv_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/input_indicator"
@@ -208,17 +208,7 @@
             app:layout_constraintStart_toEndOf="@+id/button8"
             app:layout_constraintTop_toTopOf="@+id/button8" />
 
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_clear"
-            android:textSize="@dimen/button_font"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/button11"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/button7" />
+
 
         <Button
             android:id="@+id/button1"
@@ -250,25 +240,35 @@
             android:layout_height="wrap_content"
             android:text="@string/button_7"
             android:textSize="@dimen/button_font"
-            app:layout_constraintBottom_toTopOf="@+id/button10"
+            app:layout_constraintBottom_toTopOf="@+id/buttonClear"
             app:layout_constraintEnd_toStartOf="@+id/button8"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toBottomOf="@+id/button4" />
-
+        <Button
+            android:id="@+id/buttonClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_clear"
+            android:textSize="@dimen/button_font"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toStartOf="@+id/button0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/button7" />
         <Button
             android:id="@+id/button0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_0"
             android:textSize="@dimen/button_font"
-            app:layout_constraintEnd_toStartOf="@+id/button11"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button10"
-            app:layout_constraintTop_toTopOf="@+id/button10" />
+            app:layout_constraintStart_toEndOf="@+id/buttonClear"
+            app:layout_constraintTop_toTopOf="@+id/buttonClear" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/buttonSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_submit"

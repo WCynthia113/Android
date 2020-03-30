@@ -6,13 +6,13 @@
     <data>
         <variable
             name="data"
-            type="com.wcynthia.calculationtest.ViewModel.MyViewModel" />
+            type="com.wcynthia.calculationtest.viewModel.MyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Layout.LoseFragment">
+        tools:context=".layout.LoseFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline10"
@@ -55,7 +55,7 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{string/lose_score_message(data.currentScore)}"
+            android:text="@{@string/lose_score_message(data.currentScore)}"
             android:textSize="@dimen/huge_font"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
             app:layout_constraintVertical_bias="0.336" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/bt_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_back_to_title"

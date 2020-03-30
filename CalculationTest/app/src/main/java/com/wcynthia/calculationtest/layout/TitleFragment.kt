@@ -1,4 +1,4 @@
-package com.wcynthia.calculationtest.Layout
+package com.wcynthia.calculationtest.layout
 
 
 import android.os.Bundle
@@ -7,12 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.wcynthia.calculationtest.R
-import com.wcynthia.calculationtest.ViewModel.MyViewModel
+import com.wcynthia.calculationtest.viewModel.MyViewModel
 import com.wcynthia.calculationtest.databinding.FragmentTitleBinding
 
 /**
