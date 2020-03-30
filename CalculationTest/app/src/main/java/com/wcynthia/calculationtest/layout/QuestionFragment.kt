@@ -91,16 +91,8 @@ class QuestionFragment : Fragment() {
         binding.button9.setOnClickListener(listener)
         binding.buttonClear.setOnClickListener(listener)
         binding.buttonSubmit.setOnClickListener {
-            if (stringBuffer.toString() == ""){
-                myViewModel.answerWrong()
-                val controller = Navigation.findNavController(it)
-                if (myViewModel.win_flag) {
-                    controller.navigate(R.id.action_questionFragment_to_winFragment)
-                    myViewModel.win_flag = false
-                    myViewModel.save()
-                } else {
-                    controller.navigate(R.id.action_questionFragment_to_loseFragment)
-                }
+            if (stringBuffer.isEmpty()){
+                stringBuffer.append(-1)
             }
             if (stringBuffer.toString().toInt() == myViewModel.getAnswer().value) {
                 myViewModel.answerCorrect()

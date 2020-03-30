@@ -28,7 +28,11 @@ class MainActivity : AppCompatActivity() {
             }
             val dialog = builder.create()
             dialog.show()
-        } else {
+        }
+        else if (controller.currentDestination?.id == R.id.titleFragment){
+            finish()
+        }
+        else {
             controller.navigate(R.id.titleFragment)
         }
         return super.onSupportNavigateUp()
