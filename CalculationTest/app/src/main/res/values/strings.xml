@@ -16,7 +16,7 @@
     <string name="button_8">8</string>
     <string name="button_9">9</string>
     <string name="button_clear">c</string>
-    <string name="button_submit">ok</string>
+    <string name="button_submit">OK</string>
     <string name="equal_symbol">=</string>
     <string name="question_mark">\?</string>
     <string name="current_score">Score:%d</string>
@@ -29,4 +29,7 @@
     <string name="win_score_message">New Score:%d</string>
     <string name="button_back_to_title">Back</string>
     <string name="answer_correct_message">Correct! Go on!</string>
+    <string name="dialog_quit_message">Are you sure you want to quit?</string>
+    <string name="dialog_positive_message">OK</string>
+    <string name="dialog_negative_message">Cancel</string>
 </resources>
