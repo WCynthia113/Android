@@ -1,22 +1,26 @@
 package com.wcynthia.roombasic.repository
 
+import android.content.Context
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.wcynthia.roombasic.dao.WordDao
 import com.wcynthia.roombasic.database.WordDatabase
 import com.wcynthia.roombasic.entity.Word
 
-class WordRepository {
+class WordRepository(context: Context) {
     private val wordDao: WordDao
     private val allWordsLive: LiveData<MutableList<Word>>
 
     init {
-        val wordDatabase = WordDatabase.getWordDatabase(application)
+        val wordDatabase = WordDatabase.getWordDatabase(context.applicationContext)
         wordDao = wordDatabase.getWordDao()
         allWordsLive = wordDao.getAllWords()
     }
 
 
+    fun getAllWordsLive(): LiveData<MutableList<Word>>{
+        return allWordsLive
+    }
     fun insertWords(vararg words: Word) {
         InsertAsyncTask(wordDao).execute(*words)
     }

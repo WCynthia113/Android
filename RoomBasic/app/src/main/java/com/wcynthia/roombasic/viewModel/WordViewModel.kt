@@ -11,24 +11,25 @@ import com.wcynthia.roombasic.entity.Word
 import com.wcynthia.roombasic.repository.WordRepository
 
 class WordViewModel(application: Application) : AndroidViewModel(application){
+    private val wordRepository =  WordRepository(application)
 
     fun getAllWordsLive(): LiveData<MutableList<Word>> {
-        return allWordsLive
+        return wordRepository.getAllWordsLive()
     }
 
     fun insertWords(vararg words: Word) {
-        WordRepository.InsertAsyncTask(wordDao).execute(*words)
+        wordRepository.insertWords(*words)
     }
 
     fun updateWords(vararg words: Word) {
-        UpdateAsyncTask(wordDao).execute(*words)
+        wordRepository.updateWords(*words)
     }
 
     fun deleteWords(vararg words: Word) {
-        DeleteAsyncTask(wordDao).execute(*words)
+        wordRepository.deleteWords(*words)
     }
 
     fun deleteAllWords() {
-        DeleteAllAsyncTask(wordDao).execute()
+        wordRepository.deleteAllWords()
     }
 }
