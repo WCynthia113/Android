@@ -10,18 +10,28 @@ import com.wcynthia.roombasic.viewModel.WordViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val myAdapter = MyAdapter()
+    private val adapterCard = MyAdapter(true)
+    private val adapterNormal = MyAdapter(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rv.layoutManager = LinearLayoutManager(this)
-        rv.adapter = myAdapter
+        rv.adapter = adapterNormal
         val wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         wordViewModel.getAllWordsLive().observe(this, Observer { list ->
-            myAdapter.setData(list)
-            myAdapter.notifyDataSetChanged()
+            adapterCard.setData(list)
+            adapterNormal.setData(list)
+            adapterCard.notifyDataSetChanged()
+            adapterNormal.notifyDataSetChanged()
         })
+        bt_switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                rv.adapter = adapterCard
+            }else{
+                rv.adapter = adapterNormal
+            }
+        }
         bt_insert.setOnClickListener {
             val english = arrayOf(
                 "hello",
@@ -57,16 +67,6 @@ class MainActivity : AppCompatActivity() {
         }
         bt_clear.setOnClickListener {
             wordViewModel.deleteAllWords()
-        }
-        bt_update.setOnClickListener {
-            val word = Word("Hi", "你好啊")
-            word.id = 15
-            wordViewModel.updateWords(word)
-        }
-        bt_delete.setOnClickListener {
-            val word = Word("Hi", "你好啊")
-            word.id = 14
-            wordViewModel.deleteWords(word)
         }
     }
 }
