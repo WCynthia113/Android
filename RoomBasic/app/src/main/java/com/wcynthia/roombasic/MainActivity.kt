@@ -2,6 +2,7 @@ package com.wcynthia.roombasic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,22 +11,27 @@ import com.wcynthia.roombasic.viewModel.WordViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val adapterCard = MyAdapter(true)
-    private val adapterNormal = MyAdapter(false)
+    private lateinit var adapterCard:MyAdapter
+    private lateinit var adapterNormal:MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        adapterNormal = MyAdapter(false,wordViewModel)
+        adapterCard = MyAdapter(true,wordViewModel)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapterNormal
-        val wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         wordViewModel.getAllWordsLive().observe(this, Observer { list ->
             adapterCard.setData(list)
             adapterNormal.setData(list)
-            adapterCard.notifyDataSetChanged()
-            adapterNormal.notifyDataSetChanged()
+            Log.e("data","${list.size},${adapterNormal.itemCount}")
+            if (adapterNormal.itemCount != list.size){
+                adapterCard.notifyDataSetChanged()
+                adapterNormal.notifyDataSetChanged()
+            }
         })
-        bt_switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        bt_switch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 rv.adapter = adapterCard
             }else{

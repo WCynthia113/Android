@@ -9,7 +9,9 @@ data class Word(
     @ColumnInfo(name = "english_word")
     var word: String,
     @ColumnInfo(name = "chinese_meaning")
-    var meaning: String
+    var meaning: String,
+    @ColumnInfo(name = "chinese_invisible")
+    var chineseInvisible:Boolean = false
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
