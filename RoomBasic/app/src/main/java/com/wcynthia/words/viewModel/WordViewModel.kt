@@ -1,14 +1,10 @@
-package com.wcynthia.roombasic.viewModel
+package com.wcynthia.words.viewModel
 
 import android.app.Application
-import android.os.AsyncTask
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import com.wcynthia.roombasic.dao.WordDao
-import com.wcynthia.roombasic.database.WordDatabase
-import com.wcynthia.roombasic.entity.Word
-import com.wcynthia.roombasic.repository.WordRepository
+import com.wcynthia.words.entity.Word
+import com.wcynthia.words.repository.WordRepository
 
 class WordViewModel(application: Application) : AndroidViewModel(application){
     private val wordRepository =  WordRepository(application)

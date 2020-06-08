@@ -9,7 +9,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.wcynthia.roombasic"
+        applicationId "com.wcynthia.words"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -27,6 +27,9 @@ android {
 dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor

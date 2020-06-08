@@ -1,11 +1,11 @@
-package com.wcynthia.roombasic.repository
+package com.wcynthia.words.repository
 
 import android.content.Context
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import com.wcynthia.roombasic.dao.WordDao
-import com.wcynthia.roombasic.database.WordDatabase
-import com.wcynthia.roombasic.entity.Word
+import com.wcynthia.words.dao.WordDao
+import com.wcynthia.words.database.WordDatabase
+import com.wcynthia.words.entity.Word
 
 class WordRepository(context: Context) {
     private val wordDao: WordDao

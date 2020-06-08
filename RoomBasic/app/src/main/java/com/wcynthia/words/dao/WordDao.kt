@@ -1,8 +1,8 @@
-package com.wcynthia.roombasic.dao
+package com.wcynthia.words.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.wcynthia.roombasic.entity.Word
+import com.wcynthia.words.entity.Word
 
 @Dao //Database Access Object
 interface WordDao {

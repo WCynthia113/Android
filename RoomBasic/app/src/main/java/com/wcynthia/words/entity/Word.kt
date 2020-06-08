@@ -1,4 +1,4 @@
-package com.wcynthia.roombasic.entity
+package com.wcynthia.words.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

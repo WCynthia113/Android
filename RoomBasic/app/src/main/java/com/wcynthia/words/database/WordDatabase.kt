@@ -1,13 +1,11 @@
-package com.wcynthia.roombasic.database
+package com.wcynthia.words.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.wcynthia.roombasic.dao.WordDao
-import com.wcynthia.roombasic.entity.Word
+import com.wcynthia.words.dao.WordDao
+import com.wcynthia.words.entity.Word
 
 @Database(entities = [Word::class],version = 1,exportSchema = false)
 abstract class WordDatabase :RoomDatabase(){

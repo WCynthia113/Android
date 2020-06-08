@@ -1,4 +1,4 @@
-package com.wcynthia.roombasic
+package com.wcynthia.words
 
 import org.junit.Test
 

@@ -6,54 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
-
-    <Button
-        android:id="@+id/bt_insert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="insert"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_switch"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <Button
-        android:id="@+id/bt_clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clear"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bt_switch"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <Switch
-        android:id="@+id/bt_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_clear"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bt_insert"
-        app:layout_constraintTop_toBottomOf="@+id/rv" />
-
+        app:navGraph="@navigation/navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
