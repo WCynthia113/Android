@@ -54,10 +54,10 @@ class WordsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.clearData -> {
-                val builder = AlertDialog.Builder(requireActivity()).setTitle("清空数据")
-                    .setPositiveButton("确定", DialogInterface.OnClickListener { _, _ ->
+                AlertDialog.Builder(requireActivity()).setTitle("清空数据")
+                    .setPositiveButton("确定") { _, _ ->
                         wordViewModel.deleteAllWords()
-                    }).setNegativeButton("取消", DialogInterface.OnClickListener { _, _ -> }).show()
+                    }.setNegativeButton("取消") { _, _ -> }.show()
             }
             R.id.switchViewType -> {
                 val shp =
@@ -119,17 +119,18 @@ class WordsFragment : Fragment() {
         adapterNormal = MyAdapter(false, wordViewModel)
         adapterCard = MyAdapter(true, wordViewModel)
         //ListAdapter是局部刷新所以，插入了新的一条不会回滚到第一条，也不会刷新所有的序号。
-        recyclerView.itemAnimator = object :DefaultItemAnimator(){
+        recyclerView.itemAnimator = object : DefaultItemAnimator() {
             override fun onAnimationFinished(viewHolder: RecyclerView.ViewHolder) {
                 super.onAnimationFinished(viewHolder)
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                if (linearLayoutManager!=null){
+                if (linearLayoutManager != null) {
                     val firstPosition = linearLayoutManager.findFirstVisibleItemPosition()
                     val lastPosition = linearLayoutManager.findLastVisibleItemPosition()
-                    for (i in firstPosition..lastPosition){
-                        val holder = recyclerView.findViewHolderForAdapterPosition(i) as MyAdapter.MyViewHolder?
-                        if (holder != null){
-                            holder.itemView.tv_number.text = (i+1).toString()
+                    for (i in firstPosition..lastPosition) {
+                        val holder =
+                            recyclerView.findViewHolderForAdapterPosition(i) as MyAdapter.MyViewHolder?
+                        if (holder != null) {
+                            holder.itemView.tv_number.text = (i + 1).toString()
                         }
                     }
                 }
@@ -146,12 +147,12 @@ class WordsFragment : Fragment() {
         filteredWords = wordViewModel.getAllWordsLive()
         filteredWords.observe(viewLifecycleOwner, Observer { list ->
             if (adapterNormal.itemCount != list.size || adapterNormal.itemCount == 0) {
-                adapterCard.submitList(list, Runnable {
+                adapterCard.submitList(list) {
                     recyclerView.scrollToPosition(0)
-                })
-                adapterNormal.submitList(list, Runnable {
+                }
+                adapterNormal.submitList(list) {
                     recyclerView.scrollToPosition(0)
-                })
+                }
             }
 
         })
