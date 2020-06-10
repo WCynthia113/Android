@@ -2,9 +2,14 @@ package com.wcynthia.words
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.wcynthia.words.entity.Word
 import com.wcynthia.words.viewModel.WordViewModel
@@ -14,12 +19,17 @@ import kotlinx.android.synthetic.main.cell_normal.view.tv_number
 import kotlinx.android.synthetic.main.cell_normal_2.view.*
 
 class MyAdapter(private val useCardView: Boolean, private val wordViewModel: WordViewModel) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-    private var allWords: MutableList<Word> = arrayListOf()
+    ListAdapter<Word, MyAdapter.MyViewHolder>(object : DiffUtil.ItemCallback<Word>() {
+        override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    fun setData(allWords: MutableList<Word>) {
-        this.allWords = allWords
-    }
+        override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
+            return (oldItem.word == newItem.word && oldItem.meaning == newItem.meaning && oldItem.chineseInvisible == newItem.chineseInvisible)
+        }
+
+    }) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,17 +41,14 @@ class MyAdapter(private val useCardView: Boolean, private val wordViewModel: Wor
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val word = allWords[position]
+        val word = getItem(position)
         holder.itemView.setTag(R.id.word_for_view_holder, word)
         holder.bindView(word, position)
     }
 
-    override fun getItemCount(): Int {
-        return allWords.size
+    override fun onViewAttachedToWindow(holder: MyViewHolder) {
+        super.onViewAttachedToWindow(holder)
     }
-
-
-
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(word: Word, position: Int) {
@@ -49,7 +56,8 @@ class MyAdapter(private val useCardView: Boolean, private val wordViewModel: Wor
             itemView.tv_english.text = word.word
             itemView.tv_chinese.text = word.meaning
         }
-        fun setHolderListener(wordViewModel: WordViewModel){
+
+        fun setHolderListener(wordViewModel: WordViewModel) {
             itemView.chinese_invisiable.setOnCheckedChangeListener { _, isChecked ->
                 val word = itemView.getTag(R.id.word_for_view_holder) as Word
                 if (isChecked) {
@@ -69,5 +77,4 @@ class MyAdapter(private val useCardView: Boolean, private val wordViewModel: Wor
             }
         }
     }
-
 }

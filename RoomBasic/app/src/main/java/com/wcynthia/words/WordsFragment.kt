@@ -15,9 +15,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.wcynthia.words.entity.Word
 import com.wcynthia.words.viewModel.WordViewModel
+import kotlinx.android.synthetic.main.cell_normal.view.*
 import kotlinx.android.synthetic.main.fragment_words.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,12 +90,10 @@ class WordsFragment : Fragment() {
                 val pattern = (newText ?: "").trim()
                 filteredWords.removeObservers(requireActivity())
                 filteredWords = wordViewModel.findWordsWithPattern(pattern)
-                filteredWords.observe(requireActivity(), Observer { list ->
+                filteredWords.observe(viewLifecycleOwner, Observer { list ->
                     if (adapterNormal.itemCount != list.size || adapterNormal.itemCount == 0) {
-                        adapterCard.setData(list)
-                        adapterNormal.setData(list)
-                        adapterCard.notifyDataSetChanged()
-                        adapterNormal.notifyDataSetChanged()
+                        adapterCard.submitList(list)
+                        adapterNormal.submitList(list)
                     }
 
                 })
@@ -114,10 +115,26 @@ class WordsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         adapterNormal = MyAdapter(false, wordViewModel)
         adapterCard = MyAdapter(true, wordViewModel)
+        //ListAdapter是局部刷新所以，插入了新的一条不会回滚到第一条，也不会刷新所有的序号。
+        recyclerView.itemAnimator = object :DefaultItemAnimator(){
+            override fun onAnimationFinished(viewHolder: RecyclerView.ViewHolder) {
+                super.onAnimationFinished(viewHolder)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
+                if (linearLayoutManager!=null){
+                    val firstPosition = linearLayoutManager.findFirstVisibleItemPosition()
+                    val lastPosition = linearLayoutManager.findLastVisibleItemPosition()
+                    for (i in firstPosition..lastPosition){
+                        val holder = recyclerView.findViewHolderForAdapterPosition(i) as MyAdapter.MyViewHolder?
+                        if (holder != null){
+                            holder.itemView.tv_number.text = (i+1).toString()
+                        }
+                    }
+                }
+            }
+        }
         val shp =
             requireActivity().getSharedPreferences(VIEW_TYPE_SHP, Context.MODE_PRIVATE)
         val viewType = shp.getBoolean(IS_USING_CARD_VIEW, false)
@@ -127,12 +144,14 @@ class WordsFragment : Fragment() {
             recyclerView.adapter = adapterNormal
         }
         filteredWords = wordViewModel.getAllWordsLive()
-        filteredWords.observe(requireActivity(), Observer { list ->
+        filteredWords.observe(viewLifecycleOwner, Observer { list ->
             if (adapterNormal.itemCount != list.size || adapterNormal.itemCount == 0) {
-                adapterCard.setData(list)
-                adapterNormal.setData(list)
-                adapterCard.notifyDataSetChanged()
-                adapterNormal.notifyDataSetChanged()
+                adapterCard.submitList(list, Runnable {
+                    recyclerView.scrollToPosition(0)
+                })
+                adapterNormal.submitList(list, Runnable {
+                    recyclerView.scrollToPosition(0)
+                })
             }
 
         })

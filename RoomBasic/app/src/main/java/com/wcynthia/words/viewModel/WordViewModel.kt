@@ -32,4 +32,5 @@ class WordViewModel(application: Application) : AndroidViewModel(application){
     fun deleteAllWords() {
         wordRepository.deleteAllWords()
     }
+
 }
