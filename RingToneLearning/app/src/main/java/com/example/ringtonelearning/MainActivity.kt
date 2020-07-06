@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             vibrator.vibrate(ve)
         } else {
             vibrator.vibrate(vibrationPattern, -1)
-        };
+        }
     }
     private fun useNotification(){//要修改震动和声音，需要卸载应用重装
         val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
