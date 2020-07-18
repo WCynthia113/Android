@@ -1,0 +1,23 @@
+package com.example.drawlayoutdemo
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.MotionEvent
+
+import android.widget.ScrollView
+
+class ScrollViewliding : ScrollView {
+
+
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    /*
+     * 设置不让外面的:drawerLayout拦截子View的水平滑动事假
+     * */
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        parent.requestDisallowInterceptTouchEvent(true)// 让父类不拦截触摸事件
+        return super.dispatchTouchEvent(ev)
+    }
+}

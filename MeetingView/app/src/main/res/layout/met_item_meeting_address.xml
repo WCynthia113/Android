@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="85dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="0dp">
+
+<!--    <ImageView-->
+<!--        android:id="@+id/ivItemCheck"-->
+<!--        android:layout_width="@dimen/dp_21"-->
+<!--        android:layout_height="@dimen/dp_21"-->
+<!--        android:layout_marginStart="@dimen/dp_9"-->
+<!--        android:layout_marginTop="@dimen/dp_27"-->
+<!--        android:clickable="false"-->
+<!--        android:gravity="center"-->
+<!--        android:src="@drawable/ic_radio_uncheck"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemEdgeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:background="@drawable/met_bg_round_rect"
+        android:padding="@dimen/dp_9"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/ivRoom"
+            android:layout_width="@dimen/dp_97"
+            android:layout_height="@dimen/dp_55"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:ellipsize="end"
+            android:maxEms="9"
+            android:maxLines="1"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintLeft_toRightOf="@id/ivRoom"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="第一会议室第一会" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPeopleNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toRightOf="@id/ivRoom"
+            app:layout_constraintTop_toBottomOf="@id/tvAddressName" />
+
+        <LinearLayout
+            android:id="@+id/childTitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ivRoom">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_e6e6e6" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/met_usage_time"
+                android:textColor="@color/color_f7746d"
+                android:textSize="@dimen/sp_14"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

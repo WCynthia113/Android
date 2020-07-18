@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llHeader"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_150"
+    android:background="@drawable/icon_workbench_bg"
+    android:gravity="center"
+    android:minHeight="@dimen/dp_65"
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingRight="@dimen/dp_16">
+
+    <RelativeLayout
+        android:id="@+id/lineHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_30"
+        android:orientation="horizontal">
+
+        <com.example.drawlayoutdemo.TextImageView
+            android:id="@+id/ivHead"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            app:tiv_TextColor="@color/white"
+            app:tiv_TextSize="@dimen/sp_18" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_main_tab_set" />
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lineHeader"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_8"
+        android:ellipsize="end"
+        android:maxEms="4"
+        android:singleLine="true"
+        android:textColor="@color/color_616161"
+        android:textSize="@dimen/sp_15"
+        tools:text="姓名" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUserPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/color_9E9E9E"
+        android:textSize="@dimen/sp_11"
+        tools:text="***********" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivScanQrCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:padding="@dimen/dp_6"
+        android:src="@drawable/img_scanning"
+        android:visibility="gone" />
+
+</RelativeLayout>

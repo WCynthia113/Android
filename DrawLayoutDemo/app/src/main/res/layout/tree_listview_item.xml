@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_item"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingBottom="@dimen/dp_8"
+    android:layout_height="48dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/li_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_6"
+     >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/dp_32"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/dp_32"
+            android:layout_gravity="center" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--保证整块区域可点，使用户好点击-->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/id_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/idTree"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_gravity="center"
+        android:layout_toStartOf="@id/liSelect"
+        android:layout_toEndOf="@+id/li_icon"
+        android:ellipsize="end"
+        android:gravity="center|left"
+        android:maxLines="2"
+        android:textColor="@color/color_70707a"
+        android:textSize="14sp" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/liSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_8">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>
