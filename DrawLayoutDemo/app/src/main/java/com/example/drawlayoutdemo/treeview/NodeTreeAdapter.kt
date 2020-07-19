@@ -54,16 +54,20 @@ class NodeTreeAdapter(private val context: Context, private val nodeLinkedList: 
             } else {
                 if (id != 0L && mId == 0L && type != 0) {
                 } else {
+                    //不是人，并且当前点击的不是之前点击的
                     if (mId != id && type != 0) {
                         for (i in 0 until node.mChildrenList.size) {
                             val node1 = node.mChildrenList[i]
                             node1.setIsChecked(false)
+                            //之前的点击的是它的孩子
                             if (node1.mId?.toString() == mId?.toString()) {
+                                //将当前点击的id赋予id
                                 mId = id
                             }
                         }
                     }
                 }
+                //在位置+1的地方放入所有孩子
                 nodeLinkedList.addAll(position + 1, node.mChildrenList)
             }
             node.isExpand = !old
@@ -132,6 +136,7 @@ class NodeTreeAdapter(private val context: Context, private val nodeLinkedList: 
         val builder = StringBuilder()
         builder.append("(").append(node.labelPerson).append("人)")
 
+        //如果不是人的话显示（人数）
         if (node.ordinal != 0) {
             //企业和部门 显示为：HP(54人) 移动端组（15人）
             holder.label?.text = node.mLabel + builder
@@ -139,6 +144,7 @@ class NodeTreeAdapter(private val context: Context, private val nodeLinkedList: 
             //人 显示为:XX -安卓岗位
             holder.label?.text = node.mLabel + "-" + node.roleName
         }
+        //这里的icon是指后面的那个扩展符号
         if (node.icon == -1) {
             holder.conforming?.visibility = View.INVISIBLE
         } else {
@@ -147,6 +153,8 @@ class NodeTreeAdapter(private val context: Context, private val nodeLinkedList: 
         }
 
 
+
+        //第一层，根节点，即是企业级
         if (node.mLevel == 1) {
             if (node.mLogo != null && node.mLogo != "") {
                 node.mLogo?.let { holder.ivIcon?.loadCircleImage(it) }
@@ -154,13 +162,13 @@ class NodeTreeAdapter(private val context: Context, private val nodeLinkedList: 
                 holder.ivIcon?.setImageResource(R.drawable.icon_default_person)
             }
         } else {
-            //企业
+            //企业。。根本不会走这里，因为ordinal==2的都是根节点。。。
             if (node.ordinal == 2 && node.hasChild == 0) {
                 holder.ivIcon?.setImageResource(R.color.white)
             } else {
                 holder.ivIcon?.setImageResource(R.mipmap.icon_bit_select_depment)
             }
-            //部门
+            //部门，部门下面没有人的就没有公文包吗???
             if (node.ordinal == 3 && node.hasChild == 0) {
                 holder.ivIcon?.setImageResource(R.color.white)
             } else {
