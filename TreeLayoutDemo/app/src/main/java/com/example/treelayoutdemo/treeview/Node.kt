@@ -35,8 +35,8 @@ abstract class Node(private val context: Context) {
     var isSelected = false //当前是否是被选中状态
     var hasNext = false//此层是否还有下一个
     var isFirst = false//是否是此层第一个Node
-    private var edgeView = ImageView(context)
-    private var treeEdge: MutableList<Int> = mutableListOf()
+    private var treeParentEdge: MutableList<Int> = mutableListOf()
+    var edgeLayout = R.layout.default_tree_edge_layout
 
     val isRoot: Boolean
         get() = mParent == null
@@ -48,36 +48,39 @@ abstract class Node(private val context: Context) {
     abstract fun hasChild(): Boolean
     abstract fun isParent(dest: Node): Boolean //判断当前节点是否是dest的父亲节点
     abstract fun isChild(dest: Node): Boolean //判断当前节点是否是dest的孩子节点
-    abstract fun getStartIcon(): Int//要显示的左图标资源
-    abstract fun getEndIcon(): Int//要显示的右图标资源
+    fun getStartIcon(): Int? = null//要显示的左图标资源
+    fun getEndIcon(): Int? = null//要显示的右图标资源
     fun getEdge(): List<Int> {
-        if (treeEdge.isEmpty()) {
+        val treeEdge = arrayListOf<Int>()
+        if (isRoot){
+            return treeEdge
+        }
+        if (treeParentEdge.isEmpty()) {
             if (mParent != null) {
-                treeEdge.addAll(getParentTreeEdge(mParent!!))
+                treeParentEdge.addAll(getParentTreeEdge(mParent!!))
             }
-            when {
-                isFirst && hasNext ->
-                    treeEdge.add(R.mipmap.ic_launcher)
-                isFirst && !hasNext ->
-                    treeEdge.add(R.mipmap.ic_launcher)
-                !isFirst && hasNext ->
-                    treeEdge.add(R.mipmap.ic_launcher)
-                !isFirst && !hasNext ->
-                    treeEdge.add(R.mipmap.ic_launcher)
-            }
+        }
+        treeEdge.addAll(treeParentEdge)
+        if (hasNext){
+            treeEdge.add(R.layout.default_tree_edge_layout)
+        }else{
+            treeEdge.add(R.layout.default_tree_edge_top_layout)
         }
         return treeEdge
     }
 
     private fun getParentTreeEdge(node: Node): List<Int> {
         val viewList = mutableListOf<Int>()
+        if (node.isRoot){
+            return arrayListOf()
+        }
         if (node.mParent != null) {
             viewList.addAll(getParentTreeEdge(node.mParent!!))
         }
-        if (hasNext) {
-            viewList.add(R.mipmap.ic_launcher)
-        } else {
-            viewList.add(R.mipmap.ic_launcher)
+        if (node.hasNext){
+            viewList.add(R.layout.default_tree_edge_layout)
+        }else{
+            viewList.add(R.layout.default_tree_edge_blank_layout)
         }
         return viewList
     }
@@ -85,11 +88,4 @@ abstract class Node(private val context: Context) {
 //    override fun toString(): String {
 //        return "Node(mChildrenList=$mChildrenList, mParent=$mParent,isExpand=$isExpand, isSelected=$isSelected)"
 //    }
-
-    private fun dpToPixel(dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, dp,
-            Resources.getSystem().displayMetrics
-        )
-    }
 }

@@ -3,4 +3,5 @@
     <string name="tree_edge">tree edge</string>
     <string name="start_icon">left icon</string>
     <string name="end_icon">right icon</string>
+    <string name="expand">expand</string>
 </resources>

@@ -16,7 +16,7 @@ class TaskNode(
     val startTime: String,
     val endTime: String,
     val subTaskNum: Int,
-    val parentId: Int
+    val parentId: Int?
 ) : Node(context) {
     override fun getName(): SpannableString {
         return SpannableString(name)
@@ -33,13 +33,4 @@ class TaskNode(
     override fun isChild(dest: Node): Boolean {
         return (dest as TaskNode).id == this.parentId
     }
-
-    override fun getStartIcon(): Int {
-        return R.mipmap.ic_launcher
-    }
-
-    override fun getEndIcon(): Int {
-        return R.mipmap.ic_launcher
-    }
-
 }

@@ -31,28 +31,44 @@ object NodeHelper {
         rootNodes.clear()
     }
 
-    fun Node.isParentOf(node: Node): Boolean {
-
-        node.javaClass.name
-        return node.mParent == this
-    }
-
-    fun Node.isChildOf(node: Node): Boolean {
-        return this.mParent == node
-    }
 
     fun List<Node>.setNodeParam() {
         forEachIndexed { index, node ->
             if (index == 0) {
                 node.isFirst = true
             }
-            if (index != this.size - 1) {
+            if (index != this.lastIndex) {
                 node.hasNext = true
             }
-            if (node.hasChild() && node.mChildrenList.isNotEmpty()) {
+            if (node.hasChild() && !node.mChildrenList.isNullOrEmpty()) {
                 node.mChildrenList.setNodeParam()
             }
         }
+    }
+
+
+    fun ArrayList<Node>.setDefaultExpandLevel(level: Int) {
+        var i = 0
+        var size = this.size
+        while (i < size) {
+            if (this[i].mLevel < level) {
+                expandChildTree(i, this)
+            }
+            i++
+            size = this.size
+        }
+    }
+
+    private fun expandChildTree(position: Int, nodeList: ArrayList<Node>) {
+        val node = nodeList[position]
+        if (node.mChildrenList.isNullOrEmpty()) {
+            return
+        }
+        val childrenList = node.mChildrenList
+        //将所有的孩子添加到从position+1的位置开始的位置
+        nodeList.addAll(position + 1, childrenList)
+        //将此node的展开值设为true
+        node.isExpand = true
     }
 }
 
