@@ -1,48 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tree_item"
+    android:id="@+id/tree_item_layout"
     style="@style/tree_item_style">
 
+    <include layout="@layout/item_start_icon_layout" />
 
-    <ImageView
-        android:id="@+id/iv_vertical_tree_edge"
-        style="@style/iv_vertical_tree_edge_style"
-        android:contentDescription="@string/tree_edge"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/vertical_line" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tree_item">
+        <ImageView
+            android:id="@+id/iv_start_icon"
+            style="@style/iv_start_icon_style"
+            android:contentDescription="@string/start_icon"
+            tools:src="@mipmap/ic_launcher" />
 
-    <ImageView
-        android:id="@+id/iv_horizontal_tree_edge"
-        style="@style/iv_horizontal_tree_edge_style"
-        android:contentDescription="@string/tree_edge"
-        app:layout_constraintStart_toEndOf="@id/iv_vertical_tree_edge"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/vertical_line" />
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/tv_name_style"
+            tools:text="公司名字" />
 
-    <ImageView
-        android:id="@+id/iv_start_icon"
-        style="@style/iv_start_icon_style"
-        android:contentDescription="@string/name_icon"
-        app:layout_constraintStart_toEndOf="@id/iv_horizontal_tree_edge"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/ic_launcher" />
+        <ImageView
+            android:id="@+id/iv_end_icon"
+            style="@style/iv_end_icon_style"
+            android:contentDescription="@string/end_icon" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_name"
-        style="@style/tv_name_style"
-        app:layout_constraintStart_toEndOf="@id/iv_start_icon"
-        app:layout_constraintTop_toTopOf="@id/iv_start_icon"
-        tools:text="公司名字" />
-
-
-    <ImageView
-        android:id="@+id/iv_end_icon"
-        style="@style/iv_end_icon_style"
-        android:contentDescription="@string/expand_icon"
-        app:layout_constraintStart_toEndOf="@id/tv_name"
-        app:layout_constraintTop_toTopOf="@id/iv_start_icon" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

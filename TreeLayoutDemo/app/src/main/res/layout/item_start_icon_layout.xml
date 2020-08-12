@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/expand_layout"
+    android:layout_width="45dp"
+    android:layout_height="45dp">
+
+    <com.example.treelayoutdemo.DottedLineView
+        android:id="@+id/start_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:dashGap="3dp"
+        app:dashLength="3dp"
+        app:dashThickness="3dp"
+        app:divider_line_color="#ff9e9e9e"
+        app:divider_orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/expand_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.treelayoutdemo.DottedLineView
+        android:id="@+id/centre_line"
+        android:layout_width="14dp"
+        android:layout_height="1dp"
+        app:dashGap="3dp"
+        app:dashLength="3dp"
+        app:dashThickness="3dp"
+        app:divider_line_color="#ff9e9e9e"
+        app:divider_orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/expand_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.treelayoutdemo.DottedLineView
+        android:id="@+id/bottom_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:dashGap="3dp"
+        app:dashLength="3dp"
+        app:dashThickness="3dp"
+        app:divider_line_color="#ff9e9e9e"
+        app:divider_orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/expand_icon" />
+
+    <ImageView
+        android:id="@+id/expand_icon"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:contentDescription="@string/expand"
+        android:src="@drawable/task_ic_open_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
