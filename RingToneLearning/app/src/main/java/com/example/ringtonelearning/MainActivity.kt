@@ -24,10 +24,16 @@ class MainActivity : AppCompatActivity() {
     private val vibrationPattern = longArrayOf(0L, 100L, 80L, 120L)
     private val lightColor = Color.RED
     private val channelId = "ChannelId"
+    private var num = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initRingTone()
+        initNotificationChannal()
+        initOnclick()
+    }
+
+    private fun initOnclick(){
         bt_ring.setOnClickListener {
             if (!isPlaying) {
                 playRingTone()
@@ -42,8 +48,10 @@ class MainActivity : AppCompatActivity() {
         bt_vibrate.setOnClickListener {
             playVibrate()
         }
+        bt_notification.setOnClickListener {
+            useNotification()
+        }
     }
-
     private fun initRingTone() {
         rt = RingtoneManager.getRingtone(this, url)
         rt.isLooping = true
@@ -67,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             vibrator.vibrate(vibrationPattern, -1)
         }
     }
-    private fun useNotification(){//要修改震动和声音，需要卸载应用重装
+    private fun initNotificationChannal(){
         val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val mChannel =
@@ -84,12 +92,20 @@ class MainActivity : AppCompatActivity() {
             }
             manager.createNotificationChannel(mChannel)
         }
+    }
+    private fun useNotification(){//要修改震动和声音，需要卸载应用重装
+        val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notification = NotificationCompat.Builder(this, channelId)
+            .setContentTitle("你好$num")
             .setSound(url)
             .setVibrate(vibrationPattern)
             .setLights(lightColor, 1000, 1000)
+            .setGroupSummary(true)
+            .setGroup("1")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .build()
-        manager.notify(1,notification)
+        num++
+        manager.notify(num,notification)
 
     }
 }
