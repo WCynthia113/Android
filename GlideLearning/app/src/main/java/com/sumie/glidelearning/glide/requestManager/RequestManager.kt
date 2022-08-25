@@ -2,6 +2,7 @@ package com.sumie.glidelearning.glide.requestManager
 
 import androidx.fragment.app.FragmentActivity
 import com.sumie.glidelearning.glide.fragment.GlideFragment
+import kotlin.experimental.and
 
 class RequestManager(private val fragmentActivity: FragmentActivity) {
 
@@ -22,5 +23,6 @@ class RequestManager(private val fragmentActivity: FragmentActivity) {
     fun load(url: String): Engine {
         engine.loadValueInitAction(url, fragmentActivity)
 
+        return engine
     }
 }

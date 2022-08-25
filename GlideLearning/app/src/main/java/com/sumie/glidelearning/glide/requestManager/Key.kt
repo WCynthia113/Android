@@ -7,7 +7,5 @@ class Key(path: String) {
     }
     fun setKey(key: String) {
         this.key = key
-
-
     }
 }

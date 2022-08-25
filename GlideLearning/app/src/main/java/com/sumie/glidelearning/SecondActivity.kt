@@ -13,6 +13,8 @@ class SecondActivity : AppCompatActivity() {
     }
 
     fun t1() {
-        Glide.with(this)
+        Glide
+            .with(this)
+            .load("https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg")
     }
 }
